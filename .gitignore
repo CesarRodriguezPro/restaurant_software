@@ -1,0 +1,11 @@
+*.pyc
+.vs
+.vscode
+DjangoEnv
+db.sqlite3
+.idea
+api_keys/email_key.py
+api_keys/
+*/migrations
+.DS_Store*
+*/.DS_Store

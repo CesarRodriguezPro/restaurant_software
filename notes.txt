@@ -1,0 +1,3 @@
+im using "https://testdriven.io/blog/django-stripe-tutorial/" to configure the subscription.
+
+subscription require account with stripe.com
