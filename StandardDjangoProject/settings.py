@@ -9,6 +9,8 @@ TEMPLATES_DIRS = [
     os.path.join(BASE_DIR, 'public_area', 'templates'),
     os.path.join(BASE_DIR, 'private_area', 'templates'),
     os.path.join(BASE_DIR, 'subscription', 'templates'),
+    os.path.join(BASE_DIR, 'appointments', 'templates'),
+    os.path.join(BASE_DIR, 'company', 'templates'),
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -30,12 +32,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'widget_tweaks',
+    "django_htmx",
+    'crispy_bootstrap4',
+    "phonenumber_field",
 
     # sections
     'accounts',
     'public_area',
     'private_area',
     'subscription',
+    'appointments',
+    'company',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -48,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = 'StandardDjangoProject.urls'

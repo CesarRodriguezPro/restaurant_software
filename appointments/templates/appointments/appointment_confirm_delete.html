@@ -1,0 +1,26 @@
+{% extends 'private_area/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} Appointments {% endblock %}
+
+
+{% block content %}
+<div class='container'>
+    <div class="card">
+        <div class="card-header">
+            <h3>Delete Appointment </h3>
+        </div>
+        <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                     <p>Are you sure you want to delete "{{ object }} for {{ object.date_time|date:"m/d/Y - h:i A" }} for {{ object.number_of_people }} quests?</p>
+                <input type="submit" value="Confirm">
+                </form>
+        </div>
+    </div>
+
+    </div>
+{% endblock content %}
+
+

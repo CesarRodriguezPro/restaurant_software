@@ -1,0 +1,66 @@
+{% extends 'private_area/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} Company {% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col">
+                <div class="card table-responsive">
+                    <div class="card-header">
+                        <div class="pagetitle">
+                            <div class="row">
+                            <div class="col-6">
+                                {% if inactive %}
+                                <h3>Inactive Appointments</h3>
+                                {% else %}
+                                <h3>Active Appointments</h3>
+                                {% endif %}
+                            </div>
+                            <div class="col-6 text-end">
+                                <div class="btn-group" role="group">
+                                    <a href="{% url 'company:create' %}" class="btn btn-primary">+</a>
+                                {% if inactive %}
+                                    <a href="{% url 'company:list' %}" class="btn btn-primary">Active Company</a>
+                                {% else %}
+                                   <a href="{% url 'company:inactive' %}" class="btn btn-danger">Inactive Company</a>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        {% if object_list|length > 0 %}
+                        <table class="table table-hover cell-border datatable_10" id="addEmployeeTable" style="width:100% ">
+                            <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Address</td>
+                                <td>Telephone</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in object_list %}
+                            <tr>
+                                <td><a href="{% url 'company:detail' item.pk %}">{{item.name }}</a></td>
+                                <td>{{item.address }}</td>
+                                <td>{{item.phone}} {% if item.ext %} item.ext {% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <p class="y-5">No appointments found.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock%}

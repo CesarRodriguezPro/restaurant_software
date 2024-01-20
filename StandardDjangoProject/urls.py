@@ -28,6 +28,8 @@ urlpatterns = [
     path('', include('public_area.urls', namespace='public_area')),
     path('private_area/', include('private_area.urls', namespace='private_area')),
     path('subscription/', include('subscription.urls', namespace='subscription')),
+    path('appointments/', include('appointments.urls', namespace='appointments')),
+    path('company/', include('company.urls', namespace='company')),
     path('webhook/', subscription.stripe_webhook),
 
     #  Password Reset

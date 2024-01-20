@@ -8,25 +8,18 @@ from django.contrib.auth import authenticate
 
 class LoginView(generic.View):
     def get(self, request):
-        context = {
-            'form': LoginForm(),
-        }
+        context = {'form': LoginForm()}
         return render(request, 'accounts/login.html', context)
 
     def post(self, request):
         post = request.POST
         email = post.get('email')
         password = post.get('password')
-
-        print(email)
-        print(password)
-
         user = authenticate(
             email=email,
             password=password,
         )
         if user:
-            print('log in ')
             login(request, user)
             return redirect('private_area:home')
         messages.error(request, 'Wrong Email or Password')

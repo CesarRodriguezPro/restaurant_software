@@ -1,0 +1,62 @@
+{% extends 'private_area/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Appointments {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="pagetitle">
+                    <div class="row">
+                        <div class="col-5">
+                            <h1>
+                               {% if form.instance.pk %}
+                                Update Company
+                                {% else %}
+                                Create Company
+                                {% endif %}
+                            </h1>
+                        </div>
+                        <div class="col text-end">
+
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div style="margin-top:10px">
+                                <input name="next" type="hidden" value="{{ request.GET.next }}">
+                                <div class="row">
+                                    <div class="col">
+                                        {% if form.instance.pk %}
+                                        <a type="input" class="btn btn-success" href="{% url 'company:detail' form.instance.pk %}" >Back</a>
+                                        {% else %}
+                                        <a type="input" class="btn btn-success" href="{% url 'company:list' %}" >Back</a>
+                                        {% endif %}
+                                         <input class="btn btn-success" type="submit">
+                                    </div>
+                                    <div class="col text-end">
+                                        {% if form.instance.pk %}
+                                        <a class="btn btn-danger" href="{% url 'company:delete' object.pk %}">Delete</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock%}
