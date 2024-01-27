@@ -18,7 +18,6 @@ class Home(LoginRequiredMixin, View):
             appointments = Appointment.objects.filter(
                 date=datetime.datetime.now().date(),
                 company=request.user.company,
-                restaurant=restaurants.first(),
             ).order_by('time')
         context = {
             'objects_list': appointments,
@@ -42,3 +41,12 @@ def get_restaurant_appointments(request, pk):
         "restaurants": request.user.company.restaurants.all(),
     }
     return render(request, 'private_area/main.html', context)
+
+
+def confirm_appointment(request, pk):
+    if request.htmx:
+        appointment = Appointment.objects.get(pk=pk)
+        appointment.confirmed = True
+        appointment.save()
+        context = {'i': appointment}
+        return render(request, 'private_area/partials/column.html', context)

@@ -18,18 +18,6 @@
         </div>
     </div>
     <div class="card-body">
-        {% if restaurants %}
-            <select name="restaurant" hx-swap="outerHTML" class="form-control">
-                {% for restaurant in restaurants %}
-                    <option value="{{ restaurant.pk }}"
-                            hx-get="{% url 'private_area:get_restaurant_active' restaurant.pk %}"
-                            hx-target="#appointments-container"
-                            hx-trigger="click">
-                        {{ restaurant.name }}
-                    </option>
-                {% endfor %}
-            </select>
-        {% endif %}
         <div id="appointments-container">
             {% include 'private_area/partials/today_appointments.html' %}
         </div>

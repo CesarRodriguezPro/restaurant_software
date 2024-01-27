@@ -9,8 +9,16 @@
           <span>Dashboard</span>
         </a>
       </li>
+      {% if request.user.can_see_users %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'accounts:list' %}">
+          <i class="bi bi-grid"></i>
+          <span>Accounts</span>
+        </a>
+      </li>
+      {% endif %}
 
-      {% if request.user.is_owner %}
+      {% if request.user.can_see_company %}
       <li class="nav-item">
         <a class="nav-link collapsed" href="{% url 'company:go_to_company' %}">
           <i class="bi bi-grid"></i>

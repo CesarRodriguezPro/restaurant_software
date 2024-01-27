@@ -1,0 +1,50 @@
+{% extends 'private_area/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} Appointments {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <h4>{{ object }}s</h4>
+                </div>
+                <div class="col-6 text-end">
+                    <p><strong>Last Login: </strong>{{ object.last_login|date:"m/d/Y - h:i A" }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <p><strong>First Name:</strong> {{ object.first_name }}</p>
+                    <p><strong>Last Name:</strong> {{ object.last_name }}</p>
+                    <p><strong>Address:</strong> {{ object.address }}</p>
+                    <p><strong>Phone:</strong> {{ object.telephone }} {% if object.ext %} ext. {{ object.ext }} {% endif %}</p>
+                    <p><strong>Email:</strong> {{ object.email }}</p>
+                </div>
+                <div class="col-6">
+                    <h4><strong>Permissions:</strong></h4>
+                    <p><strong>Can See Company Settings:</strong> {{ object.can_see_company }}</p>
+                    <p><strong>Can See Users settings:</strong> {{ object.can_see_users }}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-6">
+                    <a href="{% url 'accounts:list' %}" class="btn btn-primary">Back</a>
+                </div>
+                <div class="col-6 text-end">
+                    <a href="{% url 'accounts:update' object.pk %}" class="btn btn-primary">Edit</a>
+                </div>
+            </div>
+    </div>
+</div>
+
+{% endblock %}

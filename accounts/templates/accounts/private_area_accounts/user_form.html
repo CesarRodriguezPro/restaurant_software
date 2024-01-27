@@ -1,0 +1,67 @@
+{% extends 'private_area/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Appointments {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="pagetitle">
+                            <div class="row">
+                                <div class="col">
+                                    <h1>
+                                        {% if form.instance.pk %}
+                                        Update Account
+                                        {% else %}
+                                        Create Account
+                                        {% endif %}
+                                    </h1>
+                                </div>
+                                {% if form.instance.pk %}
+                                <div class="col text-end">
+                                    <a class="btn btn-success" href="{% url 'accounts:reset_password' form.instance.pk %}">Change Password</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div style="margin-top:10px">
+                                <input name="next" type="hidden" value="{{ request.GET.next }}">
+                                <div class="row">
+                                    <div class="col">
+                                        {% if form.instance.pk %}
+                                        <a type="input" class="btn btn-success" href="{% url 'accounts:detail' form.instance.pk %}" >Back</a>
+                                        <input class="btn btn-success" type="submit">
+                                        {% else %}
+                                        <a type="input" class="btn btn-success" href="{% url 'accounts:list' %}" >Back</a>
+                                        {% endif %}
+
+                                    </div>
+                                    <div class="col text-end">
+                                        {% if form.instance.pk %}
+                                        <a class="btn btn-danger" href="{% url 'accounts:delete' object.pk %}">Delete</a>
+                                        {% else %}
+                                         <input class="btn btn-success" type="submit">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock%}

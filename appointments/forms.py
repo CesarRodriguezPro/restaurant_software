@@ -72,6 +72,7 @@ class AppointmentUpdateForm(forms.ModelForm):
             'number_of_people',
             'email',
             'message',
+            'confirmed',
         ]
 
         widgets = {

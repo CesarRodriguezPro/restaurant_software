@@ -42,7 +42,7 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
 class AppointmentUpdateView(LoginRequiredMixin, UpdateView):
     model = Appointment
     form_class = AppointmentUpdateForm
-    success_url = reverse_lazy('appointments:list')
+    success_url = reverse_lazy('private_area:home')
 
 
 class AppointmentDeleteView(LoginRequiredMixin, DeleteView):

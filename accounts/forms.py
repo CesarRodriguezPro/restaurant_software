@@ -1,6 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import PasswordChangeForm
 from django import forms
+
+from accounts.models import User
 
 
 class RegisterForm(UserCreationForm):
@@ -14,3 +17,23 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
+class UserPrivateAreaForm(forms.ModelForm):
+    class Meta:
+        model = User
+        exclude = (
+            'is_superuser',
+            'is_staff',
+            'date_joined',
+            'last_login',
+            'groups',
+            'company',
+            'is_manager',
+            'is_owner',
+            'user_permissions',
+            'password',
+        )
+
+
+class CustomPasswordResetForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomPasswordResetForm, self).__init__(*args, **kwargs)

@@ -1,0 +1,32 @@
+<tr id="row_{{i.pk}}">
+    <td
+            width="10px"
+            class="text-center"
+            {% if i.confirmed %}
+            style="background-color: #82ff84;"
+            {% else %}
+            style="background-color: #f98189;"
+            {% endif %}
+    >
+        {% if i.confirmed %}
+            <i data-feather="thumbs-up" class="icon good"></i>
+        {% else %}
+        <div
+                hx-post="{% url 'private_area:appointment_confirmed' i.pk %}"
+                hx-trigger="click"
+                hx-target="#row_{{i.pk}}"
+                hx-swap="outerHTML"
+        >
+                <i data-feather="thumbs-down" class="icon bad"></i>
+        </div>
+
+        {%endif%}
+    </td>
+    <td class="text-center">{{ i.time|date:"h:i A" }}</td>
+    <td class="text-center"><a href="{% url 'appointments:detail' i.pk %}">{{ i.name }}</a></td>
+    <td class="text-center">{{ i.number_of_people }}</td>
+    <td class="text-center">{{ i.message|truncatewords:10 }}</td>
+</tr>
+<script>
+  feather.replace()
+</script>

@@ -9,7 +9,14 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3>{{ object.name }}</h3>
+            <div class="row">
+                <div class="col-6">
+                     <h3>{{ object.name }}</h3>
+                </div>
+                <div class="col-6 text-end">
+                    <h3>{{ object.restaurant.name }}</h3>
+                </div>
+
         </div>
         <div class="card-body">
             <div class="row">
@@ -22,6 +29,8 @@
                     <p><strong>Notes:</strong> {{ object.notes }}</p>
                 </div>
                 <div class="col-6">
+                    <p><strong>Is Confirm: </strong>{% if object.confirmed %} Yes {% else %} No {% endif %}</p>
+                    <p><strong>Restaurant:</strong> {{ object.restaurant.name }}</p>
                     <p><strong>Created:</strong> {{ object.created|date:"m/d/Y - h:i A" }}</p>
                     <p><strong>Updated:</strong> {{ object.updated|date:"m/d/Y - h:i A" }}</p>
                     <p><strong>Active:</strong> {% if object.is_active %} Yes {% else %} No {% endif %}</p>
