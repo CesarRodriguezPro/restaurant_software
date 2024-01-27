@@ -8,21 +8,27 @@ from appointments.models import Appointment
 
 class Home(LoginRequiredMixin, View):
     def get(self, request):
-        restaurants = request.user.company.restaurants.all()
-        if restaurants.count() == 1:
-            appointments = Appointment.objects.filter(
-                date=datetime.datetime.now().date(),
-                company=request.user.company,
-            ).order_by('time')
-        else:
-            appointments = Appointment.objects.filter(
-                date=datetime.datetime.now().date(),
-                company=request.user.company,
-            ).order_by('time')
-        context = {
-            'objects_list': appointments,
-            "restaurants": restaurants,
-        }
+        try:
+            restaurants = request.user.company.restaurants.all()
+            if restaurants.count() == 1:
+                appointments = Appointment.objects.filter(
+                    date=datetime.datetime.now().date(),
+                    company=request.user.company,
+                ).order_by('time')
+            else:
+                appointments = Appointment.objects.filter(
+                    date=datetime.datetime.now().date(),
+                    company=request.user.company,
+                ).order_by('time')
+            context = {
+                'objects_list': appointments,
+                "restaurants": restaurants,
+            }
+        except AttributeError:
+            context = {
+                'objects_list': [],
+                "restaurants": [],
+            }
         return render(request, 'private_area/main.html', context)
 
 
