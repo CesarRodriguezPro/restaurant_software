@@ -1,0 +1,29 @@
+
+
+{% if objects_list|length > 0  %}
+<div class="table-responsive">
+<table class="table table-hover cell-border datatable_10">
+    <thead>
+        <tr>
+            <th width="100px"  class="text-center">Time</th>
+            <th class="text-center">Name</th>
+            <th width="100px" class="text-center">Quests</th>
+            <th class="text-center">Message</th>
+        </tr>
+    </thead>
+    <tbody>
+
+      {% for i in objects_list %}
+        <tr>
+            <td class="text-center">{{ i.time|date:"h:i A" }}</td>
+            <td class="text-center"><a href="{% url 'appointments:detail' i.pk %}">{{ i.name }}</a></td>
+            <td class="text-center">{{ i.number_of_people }}</td>
+            <td class="text-center">{{ i.message|truncatewords:10 }}</td>
+        </tr>
+       {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<p>No Appointments Today</p>
+{% endif %}

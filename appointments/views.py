@@ -29,6 +29,11 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
     form_class = AppointmentForm
     success_url = reverse_lazy('appointments:list')
 
+    def get_form_kwargs(self):
+        kwargs = super(AppointmentCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
         form.instance.company = self.request.user.company
         return super().form_valid(form)

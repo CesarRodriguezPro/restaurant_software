@@ -30,6 +30,7 @@ urlpatterns = [
     path('subscription/', include('subscription.urls', namespace='subscription')),
     path('appointments/', include('appointments.urls', namespace='appointments')),
     path('company/', include('company.urls', namespace='company')),
+    path('restaurants/', include('restaurants.urls', namespace='restaurants')),
     path('webhook/', subscription.stripe_webhook),
 
     #  Password Reset

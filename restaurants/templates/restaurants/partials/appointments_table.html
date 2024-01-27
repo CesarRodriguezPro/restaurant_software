@@ -1,0 +1,63 @@
+<div class="card table-responsive">
+    <div class="card-header">
+        <div class="pagetitle">
+            <div class="row">
+            <div class="col-6">
+                {% if inactive %}
+                <h3>Inactive Appointments</h3>
+                {% else %}
+                <h3>Active Appointments</h3>
+                {% endif %}
+            </div>
+            <div class="col-6 text-end">
+                <bu class="btn-group" role="group">
+                {% if inactive %}
+                    <button class="btn btn-primary"
+                            hx-get="{% url 'restaurants:restaurant_appointments_active' %}"
+                     hx-trigger="click"
+                     hx-target="#appointments"
+                    >Active Appointments</button>
+                {% else %}
+
+
+                 <button class="btn btn-danger"
+                         hx-get="{% url 'restaurants:restaurant_appointments_inactive' %}"
+                     hx-trigger="click"
+                     hx-target="#appointments"
+                    >Inactive Appointments</button>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        {% if object_list|length > 0 %}
+        <table class="table table-hover cell-border datatable_10" id="addEmployeeTable" style="width:100% ">
+            <thead>
+            <tr>
+                <td>Date</td>
+                <td>Time</td>
+                <td>Name</td>
+                <td>Number Of Quests</td>
+                <td>Telephone</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.date|date:"m/d/Y" }}</td>
+                <td>{{ item.time|date:"h:i A" }}</td>
+                <td><a href="{% url 'appointments:detail' item.pk %}">{{item.name }}</a></td>
+                <td>{{item.number_of_people }}</td>
+                <td>{{item.phone}} {% if item.ext %} item.ext {% endif %}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="y-5">No appointments found.</p>
+        {% endif %}
+    </div>
+</div>

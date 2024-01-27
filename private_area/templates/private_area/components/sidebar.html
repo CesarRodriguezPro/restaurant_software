@@ -9,14 +9,23 @@
           <span>Dashboard</span>
         </a>
       </li>
-      {% if user.is_staff %}
+
+      {% if request.user.is_owner %}
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'company:list' %}">
+        <a class="nav-link collapsed" href="{% url 'company:go_to_company' %}">
           <i class="bi bi-grid"></i>
           <span>Company</span>
         </a>
       </li>
       {% endif %}
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'restaurants:restaurant_list' %}">
+          <i class="bi bi-grid"></i>
+          <span>Restaurant</span>
+        </a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{% url 'appointments:list' %}">

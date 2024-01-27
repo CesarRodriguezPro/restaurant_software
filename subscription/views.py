@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from accounts.models import CustomUser
+from accounts.models import User
 from subscription.models import StripeCustomer
 
 
@@ -71,7 +71,7 @@ def stripe_webhook(request):
             client_reference_id = session.get('client_reference_id')
             stripe_customer_id = session.get('customer')
             stripe_subscription_id = session.get('subscription')
-            user = CustomUser.objects.get(id=client_reference_id)
+            user = User.objects.get(id=client_reference_id)
             StripeCustomer.objects.create(
                 user=user,
                 stripeCustomerId=stripe_customer_id,

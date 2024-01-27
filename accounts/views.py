@@ -13,10 +13,10 @@ class LoginView(generic.View):
 
     def post(self, request):
         post = request.POST
-        email = post.get('email')
+        username = post.get('username')
         password = post.get('password')
         user = authenticate(
-            email=email,
+            username=username,
             password=password,
         )
         if user:

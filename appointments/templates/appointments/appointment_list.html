@@ -40,6 +40,7 @@
                             <thead>
                             <tr>
                                 <td>Date</td>
+                                <td>Restaurant</td>
                                 <td>Time</td>
                                 <td>Name</td>
                                 <td>Number Of Quests</td>
@@ -50,6 +51,7 @@
                             {% for item in object_list %}
                             <tr>
                                 <td>{{ item.date|date:"m/d/Y" }}</td>
+                                  <td><a href="{% url 'restaurants:restaurant_detail' item.restaurant.pk %}">{{ item.restaurant }}</td>
                                 <td>{{ item.time|date:"h:i A" }}</td>
                                 <td><a href="{% url 'appointments:detail' item.pk %}">{{item.name }}</a></td>
                                 <td>{{item.number_of_people }}</td>

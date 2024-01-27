@@ -1,10 +1,12 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from company.models import Company
+from restaurants.models import Restaurant
 
 
 class Appointment(models.Model):
     company = models.ForeignKey(Company, null=True, blank=True, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, null=True, blank=True, on_delete=models.CASCADE, verbose_name='Restaurant')
     name = models.CharField(max_length=100)
     email = models.EmailField(blank=True, null=True)
     phone = PhoneNumberField()
@@ -18,4 +20,4 @@ class Appointment(models.Model):
     observer = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.date} - {self.time} - {self.restaurant}"

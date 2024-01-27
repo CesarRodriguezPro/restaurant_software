@@ -11,6 +11,7 @@ TEMPLATES_DIRS = [
     os.path.join(BASE_DIR, 'subscription', 'templates'),
     os.path.join(BASE_DIR, 'appointments', 'templates'),
     os.path.join(BASE_DIR, 'company', 'templates'),
+    os.path.join(BASE_DIR, 'restaurants', 'templates'),
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'subscription',
     'appointments',
     'company',
+    'restaurants',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -133,7 +135,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = 'private_area:home'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'accounts:login'
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # password reset

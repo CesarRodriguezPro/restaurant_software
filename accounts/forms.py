@@ -6,11 +6,11 @@ from django import forms
 class RegisterForm(UserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ('email', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2')
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField()
+    username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
 

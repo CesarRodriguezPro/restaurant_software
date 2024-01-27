@@ -9,12 +9,12 @@
 <div class="container">
     <section class="section dashboard">
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-9 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="pagetitle">
                     <div class="row">
-                        <div class="col-5">
+                        <div class="col-md-12 col-lg-8 col-xs-12 ">
                             <h1>
                                {% if form.instance.pk %}
                                 Update Appointment
@@ -39,14 +39,17 @@
                                     <div class="col">
                                         {% if form.instance.pk %}
                                         <a type="input" class="btn btn-success" href="{% url 'appointments:detail' form.instance.pk %}" >Back</a>
+                                        <input class="btn btn-success" type="submit">
                                         {% else %}
                                         <a type="input" class="btn btn-success" href="{% url 'appointments:list' %}" >Back</a>
                                         {% endif %}
-                                         <input class="btn btn-success" type="submit">
+
                                     </div>
                                     <div class="col text-end">
                                         {% if form.instance.pk %}
                                         <a class="btn btn-danger" href="{% url 'appointments:delete' object.pk %}">Delete</a>
+                                        {% else %}
+                                         <input class="btn btn-success" type="submit">
                                         {% endif %}
                                     </div>
                                 </div>

@@ -37,17 +37,8 @@
                                 <input name="next" type="hidden" value="{{ request.GET.next }}">
                                 <div class="row">
                                     <div class="col">
-                                        {% if form.instance.pk %}
                                         <a type="input" class="btn btn-success" href="{% url 'company:detail' form.instance.pk %}" >Back</a>
-                                        {% else %}
-                                        <a type="input" class="btn btn-success" href="{% url 'company:list' %}" >Back</a>
-                                        {% endif %}
                                          <input class="btn btn-success" type="submit">
-                                    </div>
-                                    <div class="col text-end">
-                                        {% if form.instance.pk %}
-                                        <a class="btn btn-danger" href="{% url 'company:delete' object.pk %}">Delete</a>
-                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
