@@ -1,5 +1,6 @@
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.messages import success
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 from accounts.forms import UserPrivateAreaForm, CustomPasswordResetForm
@@ -59,18 +60,24 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     template_name = 'accounts/private_area_accounts/user_detail.html'
 
 
-class ResetPassword(LoginRequiredMixin, View):
+class ResetPassword(View):
 
     def get(self, request, pk):
-        user = User.objects.get(pk=pk)
-        context = {'form': CustomPasswordResetForm(user)}
+        context = {'form': CustomPasswordResetForm()}
         return render(request, 'accounts/private_area_accounts/reset_password.html', context)
 
     def post(self, request, pk):
-        user = User.objects.get(pk=pk)
-        password_form = CustomPasswordResetForm(user, request.POST)
-        if password_form.is_valid():
-            password_form.save()
-            success(request, 'Your password was successfully updated!')
-            return redirect('accounts:list')
+        user = get_object_or_404(User, pk=pk)
+        form = CustomPasswordResetForm(request.POST)
 
+        if form.is_valid():
+            password1 = form.cleaned_data.get('password1')
+            user.set_password(password1)
+            user.save()
+            if request.user == user:
+                update_session_auth_hash(request, user)
+            success(request, 'Your password was successfully updated!')
+            return redirect('accounts:detail', pk=user.pk)
+        else:
+            context = {'form': form}
+            return render(request, 'accounts/private_area_accounts/reset_password.html', context)

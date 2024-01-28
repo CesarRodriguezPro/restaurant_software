@@ -24,9 +24,11 @@
                                     </h1>
                                 </div>
                                 {% if form.instance.pk %}
+                                {% if request.user.can_change_password %}
                                 <div class="col text-end">
                                     <a class="btn btn-success" href="{% url 'accounts:reset_password' form.instance.pk %}">Change Password</a>
                                 </div>
+                                {% endif %}
                                 {% endif %}
                             </div>
                         </div>

@@ -34,6 +34,8 @@ class UserPrivateAreaForm(forms.ModelForm):
         )
 
 
-class CustomPasswordResetForm(PasswordChangeForm):
-    def __init__(self, *args, **kwargs):
-        super(CustomPasswordResetForm, self).__init__(*args, **kwargs)
+class CustomPasswordResetForm(forms.Form):
+
+    password1 = forms.CharField(label='New password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='New password confirmation', widget=forms.PasswordInput)
+

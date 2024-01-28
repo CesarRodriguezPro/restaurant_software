@@ -16,6 +16,7 @@ class User(AbstractUser):
 
     can_see_company = models.BooleanField(default=False)
     can_see_users = models.BooleanField(default=False)
+    can_change_password = models.BooleanField(default=False)
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name if self.first_name and self.last_name else self.username
