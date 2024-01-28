@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-
 from appointments.models import Appointment
 from restaurants.models import Restaurant
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
@@ -25,7 +24,9 @@ class RestaurantDetailView(LoginRequiredMixin, DetailView):
 class RestaurantCreateView(LoginRequiredMixin, CreateView):
     model = Restaurant
     fields = ['name', 'address', 'telephone', 'email']
-    success_url = reverse_lazy('restaurants:restaurant_list')
+
+    def get_success_url(self):
+        return reverse_lazy('restaurant-detail', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         form.instance.company = self.request.user.company
@@ -35,6 +36,9 @@ class RestaurantCreateView(LoginRequiredMixin, CreateView):
 class RestaurantUpdateView(LoginRequiredMixin, UpdateView):
     model = Restaurant
     fields = ['name', 'address', 'telephone', 'email']
+
+    def get_success_url(self):
+        return reverse_lazy('restaurant-detail', kwargs={'pk': self.object.pk})
 
     def get_queryset(self):
         return Restaurant.objects.filter(company=self.request.user.company)
@@ -49,8 +53,7 @@ class RestaurantDeleteView(LoginRequiredMixin, DeleteView):
         return Restaurant.objects.filter(owner=self.request.user)
 
 
-# htmx
-
+# htmx views
 def restaurant_appointments_active(request):
     restaurants = Appointment.objects.filter(
         company=request.user.company,
