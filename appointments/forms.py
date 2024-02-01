@@ -32,8 +32,10 @@ class AppointmentForm(forms.ModelForm):
         ]
 
         widgets = {
-            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'value': timezone.now().date()}),
-            'time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time', 'value': timezone.now().strftime("%H:%M")}),
+            'date': forms.DateInput(
+                attrs={'class': 'form-control', 'type': 'date', 'value': timezone.localtime(timezone.now()).date()}),
+            'time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time',
+                                           'value': timezone.localtime(timezone.now()).strftime("%H:%M")}),
         }
 
 
@@ -63,8 +65,10 @@ class AppointmentOutSideForm(forms.ModelForm):
             'message',
         ]
         widgets = {
-            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'value': timezone.now().date()}),
-            'time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time', 'value': timezone.now().strftime("%H:%M")}),
+            'date': forms.DateInput(
+                attrs={'class': 'form-control', 'type': 'date', 'value': timezone.localtime(timezone.now()).date()}),
+            'time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time',
+                                           'value': timezone.localtime(timezone.now()).strftime("%H:%M")}),
         }
 
     def clean_number_of_people(self):
