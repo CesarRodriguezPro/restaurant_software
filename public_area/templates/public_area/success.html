@@ -46,7 +46,8 @@
                               {{ form.errors }}
                           </div>
                         {% endif %}
-                        <form method="post"> {% csrf_token %}
+                        <form method="post">
+                            {% csrf_token %}
                             <div class="col-md-12">
                                    <p>
                                        <strong>Restaurant :</strong>{{ object.restaurant }}
@@ -82,7 +83,6 @@
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

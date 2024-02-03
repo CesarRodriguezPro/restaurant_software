@@ -13,6 +13,7 @@ TEMPLATES_DIRS = [
     os.path.join(BASE_DIR, 'appointments', 'templates'),
     os.path.join(BASE_DIR, 'company', 'templates'),
     os.path.join(BASE_DIR, 'restaurants', 'templates'),
+    os.path.join(BASE_DIR, 'messages_system', 'templates'),
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     "phonenumber_field",
     "anymail",
+    "messages_system",
 
     # sections
     'accounts',

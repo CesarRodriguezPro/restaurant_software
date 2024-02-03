@@ -1,0 +1,41 @@
+{% extends 'private_area/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Appointments {% endblock %}
+
+{% block content %}
+<style>
+.form-container {
+    width: 100%;
+    max-width: 400px; /* Adjust this value based on your form's width */
+    }
+</style>
+    <div class="form-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        {{ title }}
+                    </div>
+                    <form method="post">
+                       <div class="card-body">
+                           {% csrf_token %}
+                           {{ form|crispy }}
+                        </div>
+                       <div class="card-footer">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-primary" type="button" onclick="history.back()">Back</button>
+                                </div>
+                                <div class="col text-end">
+                                    <input class="btn btn-primary" type="submit" value="Send">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
