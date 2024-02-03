@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.Home.as_view(), name='home'),
     path('external/<pk>/', views.ExternalLink.as_view(), name='external'),
     path('external/<pk>/success', views.ExternalLink.as_view(), name='success'),
-
+    path('external_link/<uuid>/', views.AppointmentLinkView.as_view(), name='lookup'),
 ]

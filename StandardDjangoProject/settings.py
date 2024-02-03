@@ -1,5 +1,6 @@
 import os
 from api_keys import email_key
+from api_keys.brevo_api_key import brevo_api, webhook_secret_1, webhook_secret_2
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,7 +23,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django_htmx",
     'crispy_bootstrap4',
     "phonenumber_field",
+    "anymail",
 
     # sections
     'accounts',
@@ -47,6 +48,14 @@ INSTALLED_APPS = [
     'restaurants',
 ]
 
+BASE_URL = 'http://127.0.0.1:8000' if DEBUG else 'http://www.ez-restaurant.com'
+ANYMAIL = {
+    "SENDINBLUE_API_KEY": brevo_api,
+    'WEBHOOK_SECRET': f'{webhook_secret_1}:{webhook_secret_2}',
+}
+
+EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
+DEFAULT_FROM_EMAIL = 'tier9developer@gmail.com'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
@@ -137,11 +146,3 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'accounts:login'
 AUTH_USER_MODEL = 'accounts.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-
-# password reset
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = email_key.email
-EMAIL_HOST_PASSWORD = email_key.password

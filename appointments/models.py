@@ -1,6 +1,5 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
-
 from accounts.models import User
 from company.models import Company
 from restaurants.models import Restaurant
@@ -22,6 +21,7 @@ class Appointment(models.Model):
     observer = models.BooleanField(default=False)
     observer_by = models.ManyToManyField(User, blank=True)
     confirmed = models.BooleanField(default=False)
+    confirmation_number = models.UUIDField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.name} - {self.date} - {self.time} - {self.restaurant}"

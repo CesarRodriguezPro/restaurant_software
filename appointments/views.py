@@ -1,4 +1,6 @@
+import uuid
 from django.urls import reverse_lazy
+from appointments.email_functions import send_email_confirmation_to_user
 from appointments.forms import AppointmentForm, AppointmentUpdateForm
 from appointments.models import Appointment
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -36,6 +38,11 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.company = self.request.user.company
+        confirmation_number = uuid.uuid4()
+        form.instance.confirmation_number = confirmation_number
+        appointment = form.save()
+        if appointment.email:
+            send_email_confirmation_to_user(self.request.user.company.email, appointment)
         return super().form_valid(form)
 
 

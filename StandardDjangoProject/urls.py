@@ -32,6 +32,7 @@ urlpatterns = [
     path('company/', include('company.urls', namespace='company')),
     path('restaurants/', include('restaurants.urls', namespace='restaurants')),
     path('webhook/', subscription.stripe_webhook),
+    path("anymail/", include("anymail.urls")),
 
     #  Password Reset
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html'),
