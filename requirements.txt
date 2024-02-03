@@ -1,8 +1,11 @@
 asgiref==3.7.2
 certifi==2023.11.17
+cffi==1.16.0
 charset-normalizer==3.3.2
 crispy-bootstrap4==2023.1
+cryptography==42.0.2
 Django==5.0.1
+django-anymail==10.2
 django-crispy-forms==2.1
 django-htmx==1.17.2
 django-phonenumber-field==7.3.0
@@ -10,6 +13,7 @@ django-widget-tweaks==1.5.0
 idna==3.6
 phonenumbers==8.13.29
 pillow==10.2.0
+pycparser==2.21
 requests==2.31.0
 sqlparse==0.4.4
 stripe==8.0.0
