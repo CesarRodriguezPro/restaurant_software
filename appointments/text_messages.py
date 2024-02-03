@@ -10,11 +10,9 @@ def send_text_message():
     configuration.api_key['api-key'] = brevo_api
     api_instance = sib_api_v3_sdk.TransactionalSMSApi(sib_api_v3_sdk.ApiClient(configuration))
     send_transac_sms = sib_api_v3_sdk.SendTransacSms(
-        sender="string",
-        recipient="string",
-        content="string",
-        type="string",
-        web_url="https://example.com/notifyUrl"
+        sender="+12124704458",
+        recipient="+12124704458",
+        content="test ",
     )
 
     try:

@@ -5,7 +5,7 @@ from StandardDjangoProject.settings import BASE_URL
 
 
 def send_email_confirmation_to_user(company_email, appointment):
-    print("base url: ", BASE_URL)git
+    print("base url: ", BASE_URL)
     print("email: ", appointment.email)
     print("date: ", appointment.date)
 
