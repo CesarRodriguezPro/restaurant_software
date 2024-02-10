@@ -1,22 +1,16 @@
-from __future__ import print_function
-import sib_api_v3_sdk
-from sib_api_v3_sdk import TransactionalSMSApi
-from sib_api_v3_sdk.rest import ApiException
-from api_keys.brevo_api_key import brevo_api
+from twilio.rest import Client
+from api_keys.twilio import ACCOUNT_SID, AUTH_TOKEN, verify_sid
 
 
-def send_text_message(request, recipient, message) -> TransactionalSMSApi:
-    configuration = sib_api_v3_sdk.Configuration()
-    configuration.api_key['api-key'] = brevo_api
-    api_instance = sib_api_v3_sdk.TransactionalSMSApi(sib_api_v3_sdk.ApiClient(configuration))
-    send_transac_sms = sib_api_v3_sdk.SendTransacSms(
-        sender=request.user.company.telephone,
-        recipient=recipient,
-        content=message,
-    )
-    try:
-        api_response: TransactionalSMSApi = api_instance.send_transac_sms(send_transac_sms)
-        return api_response
+def test_send_sms():
+    account_sid = ACCOUNT_SID
+    auth_token = AUTH_TOKEN
+    verified_number = "+12124704458"
 
-    except ApiException as e:
-        print(f"Exception when calling TransactionalSMSApi->send_transac_sms:{e}")
+    client = Client(account_sid, auth_token)
+
+    verification = client.verify.v2.services(verify_sid).verifications.create(to=verified_number, channel="sms")
+    print(verification.status)
+    otp_code = input("Please enter the OTP:")
+    verification_check = client.verify.v2.services(verify_sid).verification_checks.create(to=verified_number, code=otp_code)
+    print(verification_check.status)
